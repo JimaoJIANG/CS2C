@@ -1,0 +1,52 @@
+MODEL:
+  name: "default"
+  compactness: 0.2
+  n_clusters: 14
+  n_segments: 3000
+  n_eigens: 12
+  mlp_hidden_dim_spec: 12
+  mlp_hidden_dim_spa: 64
+  alpha: 4.0
+  w_emb: 1.0
+  w_clu: 1.0
+  w_reg: 1.0
+  student_v: 1.0
+  device: 0
+
+  img_size: 80
+  patch_size: 5
+  embed: 192
+  embed_dim: 192
+  depth: 14
+  num_heads: 1
+  decoder_embed_dim: 128
+  decoder_depth: 7
+  decoder_num_heads: 8
+  mlp_ratio: 2.0
+  mask_ratio: 0.5
+  pos_encode_w: 0.08
+  central_patch: 4
+  in_chans: 1
+  pretrained_path: "./configs/model.pt"
+DATASET:
+  name: "BetaSegDataset2D"
+  path_list: "./data/betaseg/imgs_tensor.txt"
+  num_workers: 2
+  batch_size: 1
+  input_size: 560
+ENGINE:
+  name: "train_engine"
+  load_pretrained: 0
+  epoch: 25
+  stage_two_start: 1500
+  stage_three_start: 4600
+  kl_centers_start: 3000
+
+  clusters_plot_count: 200  # for every
+  eigens_plot_count: 800  # for every
+  save_count: 200  # for every
+
+  device: 0
+OPTIM:
+  lr_initial: 0.01
+  lr_adjusted: 0.0001
